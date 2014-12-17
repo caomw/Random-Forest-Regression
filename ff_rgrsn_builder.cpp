@@ -17,6 +17,7 @@ ff_rgrsn_builder::ff_rgrsn_builder()
     tree_number_ = 10;
     max_depth_ = 5;
     min_node_size_ = 12;
+	min_sample_num_ = 5;
     verbose_ = true;
 }
 ff_rgrsn_builder::~ff_rgrsn_builder()

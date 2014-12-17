@@ -94,7 +94,7 @@ bool ff_rgrsn_tree_node::read_FF_tree(const char *fileName, ff_rgrsn_tree_node *
     fgets(lineBuf, sizeof(lineBuf), pf);
     printf("%s\n", lineBuf);
     read_FF_linear_prediction(pf, root);
-    pclose(pf);
+    fclose(pf);
     return true;
 }
 

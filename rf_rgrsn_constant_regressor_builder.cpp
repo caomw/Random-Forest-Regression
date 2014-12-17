@@ -42,7 +42,7 @@ bool rf_rgrsn_constant_regressor_builder::build_model(rf_rgrsn_constant_regresso
         rf_rgrsn_tree_parameter parameter;
         parameter.max_tree_depth_  = max_depth_;
         parameter.min_feature_num_ = min_node_size_;
-        parameter.min_sample_num_ = min_sample_num_;
+        parameter.max_sample_num_ = max_sample_num_;
         
         pTree->build(training_inputs, training_outputs, parameter, costFunction);
         trees.push_back(pTree);

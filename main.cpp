@@ -61,7 +61,7 @@ bool read_feature_labels(const char *file, const int feature_dim, vector<nl_vect
     return true;
 }
 
-bool read_sin_noise_3(vector<double> & gds, vector<double> & noisy_gds, const char *file)
+static bool read_sin_noise_3(vector<double> & gds, vector<double> & noisy_gds, const char *file)
 {
     assert(file);
     FILE *pf = fopen(file, "r");
@@ -85,7 +85,7 @@ bool read_sin_noise_3(vector<double> & gds, vector<double> & noisy_gds, const ch
     return true;
 }
 
-void generateMultiScaleFeature(const vector<double> & data,
+static void generateMultiScaleFeature(const vector<double> & data,
                                const vector<double> & groundTruth,
                                const vector<unsigned int> & windowSize,
                                const int step,
@@ -129,18 +129,19 @@ void test_constant_regressor()
     
     rf_rgrsn_constant_regressor_builder builder;
     
-    unsigned int tree_num = 10;
+	unsigned int min_node_size = 6;    
     unsigned int max_depth = 6;
-    unsigned int min_node_size = 6;
+	unsigned int tree_num = 10;    
     unsigned int min_sample_num = 5;
     
     rf_rgrsn_tree_cost_function_constant costFunction;
     rf_rgrsn_constant_regressor *pRegressor = builder.new_regressioner();
     
-    builder.set_tree_number(tree_num);
+	// min_node_size, max_tree_depth, tree_num, max_sample_numer
+	builder.set_min_node_size(min_node_size);   
     builder.set_tree_depth(max_depth);
-    builder.set_min_node_size(min_node_size);
-    builder.set_min_sample_num(min_sample_num);
+	builder.set_tree_number(tree_num);    
+    builder.set_max_sample_num(min_sample_num);
     
     builder.build_model(*pRegressor, train_features, train_labels, costFunction);
     
@@ -205,13 +206,6 @@ void test_filter_forest_regressor()
     builder.set_tree_number(20);
     
     builder.build_model(*pRegressor, multi_scale_features, labels, costFunction);
-    
-    //
-    string save_file("ff_regressor_temp_.txt");
-    pRegressor->write(save_file.c_str());
-    
-    pRegressor = builder.new_regressioner();
-    pRegressor->read(save_file.c_str());
     
     // testing
     vector<double> testResult;

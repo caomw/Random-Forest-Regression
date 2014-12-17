@@ -17,7 +17,7 @@ void rf_rgrsn_tree_constant::build(const vector< nl_vector > & features,
     assert(features.size() == labels.size());
     assert(features.size() > 0);
     
-    feature_dim_ = (unsigned)features.front().size();
+    feature_dim_ = features.front().size();
     root_ = dynamic_cast<rf_rgrsn_tree_node_constant *> (costFunction.new_tree_node());
     assert(root_);
     root_->depth_ = 0;
@@ -82,7 +82,7 @@ static bool bestSplittingInOneDimenstion(const vector< nl_vector >& features,
         data_x_nDim.push_back(features[indices[i]][nDim]);
     }
    
-    random_sample(data_x_nDim, std::max((unsigned int)features.front().size(), para.min_sample_num_));
+    random_sample(data_x_nDim, std::min((unsigned int)features.front().size(), para.max_sample_num_));
     loss = INT_MAX;
     
     bool isDivided =  false;

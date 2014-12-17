@@ -26,6 +26,7 @@ private:
     unsigned int tree_number_;
     unsigned int max_depth_;
     unsigned int min_node_size_;
+	unsigned int min_sample_num_;
     
     bool verbose_;
     
@@ -35,7 +36,8 @@ public:
     
     void set_tree_number(unsigned int tree_num) {tree_number_ = tree_num;}
     void set_tree_depth(unsigned int max_depth) {max_depth_ = max_depth;}
-    void set_min_node_size(unsigned int min_node_size) {min_node_size_ = min_node_size;}    
+    void set_min_node_size(unsigned int min_node_size) {min_node_size_ = min_node_size;}
+	void set_max_sample_num(unsigned int num) { min_sample_num_ = num;}
     
     //: Create empty model
     ff_rgrsn_regressor* new_regressioner() const;

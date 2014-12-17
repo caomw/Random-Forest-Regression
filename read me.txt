@@ -1,0 +1,8 @@
+The code is test on Windows 7 with visual c++ 2010 and matlab R2014.
+
+1. make
+   It generates rf_rgrsn_train.mexw64 and rf_rgrsn_test.mexw64
+2. load('data_2D_regression.mat') % load data
+   [s] = rf_rgrsn_train(Xtrain, ytrain, [6, 6, 10, 5]', 'temp_.txt'); %train
+   [pre] = rf_rgrsn_predict(Xtest, 'temp_.txt'); % test
+3. the rms error is about 0.1

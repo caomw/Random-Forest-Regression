@@ -2,15 +2,27 @@
 #include "rf_rgrsn_constant_regressor_builder.h"
 #include "mex.h"
 
-
+#if 1
 // Interface function of matlab
-// assume prhs[0]: features, prhs[1]: regression file (.txt)
-// plhs[0]: predicted values
+// 0: features
+// 1: regression file
+// return predicted value
 void mexFunction( int nlhs, mxArray *plhs[],
                   int nrhs, const mxArray *prhs[] )
 {
 	const char *error_msg;
-	
+
+	if(nrhs != 2)
+	{
+		mexPrintf("Error: parameter must be features, regression file.\n");
+		return;
+	}
+	if(nlhs > 1)
+	{
+		mexPrintf("Error: return parameter is 1. It is predicted values.\n");
+		return;
+	}
+
 	if(nrhs == 2)
 	{		
 		//get training data dimension and point
@@ -58,6 +70,7 @@ void mexFunction( int nlhs, mxArray *plhs[],
 		}
 		
 		mxFree(input_regressor_name);
-	} 
-    
+	}   
 }
+
+#endif

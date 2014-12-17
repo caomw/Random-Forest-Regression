@@ -103,7 +103,7 @@ static bool bestSplittingInDimenstionWithRandom(const vector< vector< nl_vector 
         data_x_nDim.push_back(inputs[idx][scaleIndex][dim]);
     }
     
-    random_sample(data_x_nDim, std::max((unsigned int)inputs.front().size(), para.min_sample_num_));
+    random_sample(data_x_nDim, std::max((unsigned int)inputs.front().size(), para.max_sample_num_));
     loss = INT_MAX;
     
     //for each possible threshold
@@ -182,7 +182,7 @@ static bool bestSplittingDimension(const vector< vector< nl_vector > > & inputs,
     }
     random_shuffle( randomDimensions.begin(), randomDimensions.end());
     
-    unsigned int subDims = sqrt(nDims);
+    unsigned int subDims = sqrt(double(nDims));
     
     assert( subDims > 0 );
     assert( subDims <= nDims );

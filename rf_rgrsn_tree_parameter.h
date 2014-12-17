@@ -19,13 +19,13 @@ using namespace std;
 struct rf_rgrsn_tree_parameter{
     unsigned int max_tree_depth_;
     unsigned int min_feature_num_;
-    unsigned int min_sample_num_;    // minimum sample number in spliting
+    unsigned int max_sample_num_;    // maximum sample number in spliting
     
     rf_rgrsn_tree_parameter()
     {
         max_tree_depth_  = 8;
         min_feature_num_ = 8;
-        min_sample_num_ = 5;
+        max_sample_num_ = 5;
     }
 };
 
